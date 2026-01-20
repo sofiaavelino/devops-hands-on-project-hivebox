@@ -51,5 +51,3 @@ def test_version_strip():
     response = client.get("/version")
     assert response.json() == {"version": "2.3.4"}
     remove_version_file()
-
-    #something
