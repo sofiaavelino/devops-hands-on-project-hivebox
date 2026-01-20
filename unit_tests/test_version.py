@@ -5,6 +5,7 @@ import os
 
 client = TestClient(app)
 
+
 def write_version_file(content):
     '''Helper function to write temporary version file'''
     with open("../version.txt", "w", encoding="utf-8") as f:

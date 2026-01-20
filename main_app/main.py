@@ -20,22 +20,6 @@ async def fetch_boxes(params):
         response.raise_for_status()
         return response.json()
 
-'''async def fetch_last_measurement(sensor_id):
-    url = f"https://api.opensensemap.org/sensors/{sensor_id}/data?limit=1"
-    async with httpx.AsyncClient() as client:
-        try:
-            resp = await client.get(url)
-            resp.raise_for_status()
-            data = resp.json()
-            if not data:
-                return None
-            return data[0]
-        except httpx.HTTPStatusError as e:
-            if e.response.status_code == 404:
-                # Sensor does not exist or has no data → skip
-                return None
-            raise  # re-raise other errors'''
-
 def compute_average_temperature(boxes):
     """Function computing average temperature from data."""
     now = datetime.now(timezone.utc)
@@ -97,13 +81,13 @@ async def get_temperature():
     if CACHE_VALUE and CACHE_TIME:
         if now - CACHE_TIME < CACHE_TTL:
             return CACHE_VALUE
-        
+
     params = {
         "date": f"{cutoff.strftime('%Y-%m-%dT%H:%M:%SZ')},{now.strftime('%Y-%m-%dT%H:%M:%SZ')}",
         "phenomenon": "Temperatur",
         "bbox": "-10,35,30,60"
     }
-        
+
     boxes = await fetch_boxes(params)
     result = compute_average_temperature(boxes)
 
@@ -133,5 +117,3 @@ def get_version():
     """Function printing python version."""
     with open(APP_VERSION_FILE, encoding="utf-8") as f:
         return {"version": f.read().strip()}
-
-
