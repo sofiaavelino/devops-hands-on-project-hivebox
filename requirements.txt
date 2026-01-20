@@ -1,0 +1,6 @@
+fastapi
+datetime
+requests
+uvicorn 
+httpx 
+pytest
