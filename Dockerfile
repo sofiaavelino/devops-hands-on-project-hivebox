@@ -1,4 +1,12 @@
 FROM python:3.11-slim
-COPY . /app
+
 WORKDIR /app
-CMD ["python", "get_version.py"]
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+WORKDIR /app/main_app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
