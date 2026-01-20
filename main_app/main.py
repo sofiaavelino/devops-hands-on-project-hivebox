@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 app = FastAPI()
 
 SENSEBOX_URL = "https://api.opensensemap.org/boxes"
-APP_VERSION_FILE = "/Users/user2/Documents/HiveBoxProj/devops-hands-on-project-hivebox/version.txt"
+APP_VERSION_FILE = "../version.txt"
 CACHE_TTL = timedelta(minutes=5)
 
 # In-memory cache
@@ -39,7 +39,7 @@ async def fetch_boxes(params):
 def compute_average_temperature(boxes):
     """Function computing average temperature from data."""
     now = datetime.now(timezone.utc)
-    cutoff = now - timedelta(hours=24)
+    cutoff = now - timedelta(hours=1)
 
     temps = []
 

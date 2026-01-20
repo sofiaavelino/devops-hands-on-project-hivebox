@@ -11,14 +11,14 @@ def test_average_temperature():
         {
             "sensors": [
                 {
-                    "type": "temperature",
+                    "unit": "°C",
                     "lastMeasurement": {
                         "value": "20.0",
                         "createdAt": (now - timedelta(minutes=30)).isoformat()
                     }
                 },
                 {
-                    "type": "temperature",
+                    "unit": "°C",
                     "lastMeasurement": {
                         "value": "22.0",
                         "createdAt": (now - timedelta(minutes=10)).isoformat()
@@ -40,7 +40,7 @@ def test_old_data_is_ignored():
         {
             "sensors": [
                 {
-                    "type": "temperature",
+                    "unit": "°C",
                     "lastMeasurement": {
                         "value": "10",
                         "createdAt": (now - timedelta(hours=2)).isoformat()
@@ -58,13 +58,13 @@ client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def patch_fetch_boxes():
-    async def mock_fetch_boxes():
+    async def mock_fetch_boxes(params=None):
         now = datetime.now(timezone.utc)
         return [
             {
                 "sensors": [
                     {
-                        "type": "temperature",
+                        "unit": "°C",
                         "lastMeasurement": {
                             "value": "25",
                             "createdAt": now.isoformat()
