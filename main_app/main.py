@@ -99,7 +99,7 @@ async def get_temperature():
             return CACHE_VALUE
         
     params = {
-        "date": f"{cutoff.strftime("%Y-%m-%dT%H:%M:%SZ")},{now.strftime("%Y-%m-%dT%H:%M:%SZ")}",
+        "date": f"{cutoff.strftime('%Y-%m-%dT%H:%M:%SZ')},{now.strftime('%Y-%m-%dT%H:%M:%SZ')}",
         "phenomenon": "Temperatur",
         "bbox": "-10,35,30,60"
     }
