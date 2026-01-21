@@ -44,4 +44,17 @@ jobs:
     - name: Build Docker image
       run: |
         docker build -t hivebox-app .
-
+    - name: Check /version endpoint
+      run: |
+        RESPONSE=$(curl -s http://localhost:8080/version)
+        echo "Response: $RESPONSE"
+    
+        EXPECTED_VERSION="v0.0.1"
+    
+        if [[ "$RESPONSE" != *"$EXPECTED_VERSION"* ]]; then
+          echo "❌ Version mismatch"
+          exit 1
+        fi
+    
+        echo "✅ Version is correct"
+  
